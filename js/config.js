@@ -4,8 +4,8 @@ $(function() {
 	    // array representing the format and columns of the cart, see
 	    // the cart columns documentation
 	    cartColumns: [
-	        { attr: "name" , label: "Name" },
-	        { attr: "price" , label: "Price", view: 'currency' },
+	        { attr: "name" , label: "Nome" },
+	        { attr: "price" , label: "Preço", view: 'currency' },
 	        { view: "decrement" , label: false },
 	        { attr: "quantity" , label: "Qty" },
 	        { view: "increment" , label: false },
@@ -23,7 +23,7 @@ $(function() {
 	    },
 
 	    // set the currency, see the currency reference for more info
-	    currency: "USD",
+	    currency: "BRL",
 
 	    // collection of arbitrary data you may want to store with the cart,
 	    // such as customer info
@@ -73,7 +73,7 @@ $(function() {
 	simpleStore.init({
 
 		// brand can be text or image URL
-		brand : "SimpleStore",
+		brand : "http://localhost/facilities-food/images/kcb-facilities_logo.png",
 
 		// numder of products per row (accepts 1, 2 or 3)
 		numColumns : 3,
@@ -81,6 +81,16 @@ $(function() {
 		// name of JSON file, located in directory root
 		JSONFile : "products.json"
 
+	});
+
+	sider_bar.init({
+		div : 			$('#div-sidebar'), 
+		template: 		$('#sidebar-template'), 
+		element:		$('.sidebar'), 
+		button_event:	$('#event_sidebar'),
+		class_close:	$('.close_sidebar'),
+		close_generic:	'close_sidebar',
+		category: "category.json"
 	});
 
 });

@@ -301,9 +301,78 @@ p.error_text {
 	top: 0;
 	z-index: 9999;
 }
+
 p.notify_text {
 	margin-bottom: 0rem;
 }
+
+/* Sider-bar*/
+
+.sidebar {
+    background: #33c3f0;
+    position: absolute;
+    width: 414px;
+    top: 0;
+    height: 96vh;
+    border-radius: 4px;
+    border: solid 1px #d1d1d1;
+    z-index: 10000;
+}
+
+.sidebar .sidebar-content .name, .email{
+    color: #fff;
+}
+
+.sidebar .sidebar-content .top-head {
+    margin-bottom: 20px;
+}
+
+.sidebar .sidebar-content {
+    margin: 19px;
+}
+
+.sidebar .sidebar-content .nav-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .sidebar-content .nav-left a {
+    font-size: 1.3em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar .sidebar-content .nav-left>a>span {
+    color: #fff;
+    margin-right: 8px;
+
+}
+
+.sidebar .sidebar-content .nav-left .ml-1 {
+    margin-left: 20px;
+}
+
+.sidebar .sidebar-content .close_sidebar .x{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    color: #fff;
+    font-weight: 900;
+    font-size: 29px;
+    top: 6px;
+    padding: 2px 19px;
+}
+
+.sidebar .sidebar-content .nav-left .div_category {
+    display: flex;
+    flex-direction: column;
+}
+
+.item_categoria {
+    visibility: hidden;
+    position: absolute;
+}
+
 
 @media (max-width: 920px) {
     .simpleStore_getDetail_container {

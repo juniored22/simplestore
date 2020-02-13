@@ -1,33 +1,66 @@
 {
 	"products" : [
 		{
-			"name" : "Awesome T-shirt",
+			"name" : "Bolacha",
 			"price" : "35.99",
 			"options" : [
 				{ "Size" : "Small,Medium,Large" }
 			],
-			"image" : "http://upload.wikimedia.org/wikipedia/commons/c/c6/Grey_Tshirt.jpg",
-			"description" : "This is a very awesome grey T-shirt"
+			"image" : "https://www.receitasdemae.com.br/wp-content/uploads/2015/05/Biscoito-de-%C3%A1gua-e-sal-380x285.jpg",
+			"description" : "This is a very awesome grey T-shirt",
+			"category":"bolachas"
 		},
 		{
-			"name" : "Cool T-shirt",
+			"name" : "Chá verde",
 			"price" : "15.99",
 			"options" : [
 				{ "Size" : "Small,Medium,Large" },
 				{ "Color" : "Blue,Red" },
 			    { "OneOfAKind" : true }
 			],
-			"image" : "http://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg",
-			"description" : "This is a really cool blue T-shirt"
+			"image" : "https://w1.ezcdn.com.br/rebalcomercial/fotos/grande/3302fg1/xicara-cha-porcelana-com-pires-170-ml-branca-geni-porcelanas-pvc-005.jpg",
+			"description" : "This is a really cool blue T-shirt",
+			"category":"bebidas-quentes"
 		},
 		{
-			"name" : "Fun T-shirt",
+			"name" : "Café",
 			"price" : "15.99",
 			"options" : [
 				{ "Size" : "Small,Medium,Large" }
 			],
-			"image" : "http://upload.wikimedia.org/wikipedia/commons/c/c6/Grey_Tshirt.jpg",
-			"description" : "This is another fun grey T-shirt"
+			"image" : "https://static1.conquistesuavida.com.br/ingredients/3/54/52/03/@/24702--ingredient_detail_ingredient-2.png",
+			"description" : "This is another fun grey T-shirt",
+			"category":"bebidas-quentes"
+		},
+		{
+			"name" : "Bolo",
+			"price" : "15.99",
+			"options" : [
+				{ "Size" : "Small,Medium,Large" }
+			],
+			"image" : "https://www.extrabom.com.br/uploads/produtos/350x350/2260_bolo_redondo_chocolate_kg.jpg",
+			"description" : "This is another fun grey T-shirt",
+			"category":"bolos"
+		},
+		{
+			"name" : "Refrigerantes",
+			"price" : "15.99",
+			"options" : [
+				{ "Size" : "Small,Medium,Large" }
+			],
+			"image" : "https://www.mundoboaforma.com.br/wp-content/uploads/2017/03/refrigerantes.jpg",
+			"description" : "This is another fun grey T-shirt",
+			"category":"bebidas"
+		},
+		{
+			"name" : "Água",
+			"price" : "15.99",
+			"options" : [
+				{ "Size" : "Small,Medium,Large" }
+			],
+			"image" : "https://www.sondadelivery.com.br/img.aspx/sku/1562541/530/1562541.png",
+			"description" : "This is another fun grey T-shirt",
+			"category":"bebidas"
 		}
 	]
 }

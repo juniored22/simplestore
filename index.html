@@ -21,7 +21,7 @@
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/imports.min.css">
-    <link rel="stylesheet" href="css/simpleStore.min.css">
+    <link rel="stylesheet" href="css/simpleStore.css">
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -32,9 +32,16 @@
 
     <!-- Primary Page Layout
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div id="div-sidebar"></div>
+
     <div class="container simpleStore">
         <div class="row">
             <a class="brand" href="#"></a>
+            <div class="three columns" style="display: flex;">
+                <input class="u-full-width" type="text" placeholder="Pesquisar" id="exampleEmailInput">
+                <button class="button-primary"><i class="fa fa-search"></i></button>
+            </div>
+            <a id="event_sidebar" class="button u-pull-right columns two " href="javascript:;">MENU<i class="fa fa-bars"></i></a>
             <a class="button button-primary u-pull-right simpleStore_viewCart">
                 <i class="fa fa-shopping-cart"></i> Cart <span class="simpleCart_total"></span>
             </a>
@@ -45,6 +52,32 @@
 
     <!-- Templates
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+    <!-- Sider-bar View -->
+    <script id="sidebar-template" type="x-template">
+        <div class="column">
+            <div class="sidebar">
+                <div class="row ">
+                    <div class="sidebar-overlay"></div>
+                    <div class="sidebar-content">
+                        <div  class="close_sidebar"><span class="x" >x</span></div>
+                        <div class="top-head">
+                            <div class="name">Mohan Khadka</div>
+                            <div class="email">contact@mohankhadka.com.np</div>
+                        </div>
+                        <div class="nav-left">
+                            <a href="#" class="close_sidebar"><span class="fa fa-home"></span> Home</a>
+                            <a href="#cart"  class="close_sidebar"><span class="fa fa-shopping-cart"></span> Carrinho</a>
+                            <a href="javascript:;"><span class="fa fa-filter"></span> Filtro</a>
+                            <div class="div_category">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 
     <!-- Products View -->
     <script id="products-template" type="x-template">
@@ -57,7 +90,7 @@
                         <span class="item_price"></span>
                     </div>
                     <div class="simpleStore_getDetail_container">
-                        <a class="button u-pull-right simpleStore_getDetail">Details</a>
+                        <a class="button u-pull-right simpleStore_getDetail">Detalhes</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +117,7 @@
                         <input type="number" value="1" min="1" step="1" class="item_Quantity">
                     </div>
                     <div class="simpleStore_options"></div>
-                    <a class="item_add button u-pull-right" href="javascript:;">Add to Cart</a>
+                    <a class="item_add button u-pull-right" href="javascript:;">Add para o Carrinho</a>
                 </div>
             </div>
         </div>
@@ -99,7 +132,7 @@
             <div class="row">
                 <div class="eight columns">
                     <div class="simpleCart_items"></div>
-                    <a href="javascript:;" class="simpleCart_empty u-pull-left">Empty Cart <i class="fa fa-trash-o"></i></a>
+                    <a href="javascript:;" class="simpleCart_empty u-pull-left">Esvaziar o carrinho <i class="fa fa-trash-o"></i></a>
                 </div>
                 <div class="four columns">
                     <div class="cart_info">
@@ -142,7 +175,7 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/simpleCart.min.js"></script>
-<script src="js/simpleStore.min.js"></script>
+<script src="js/simpleStore.js"></script>
 
 <script src="js/config.js"></script>
 

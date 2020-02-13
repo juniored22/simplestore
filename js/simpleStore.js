@@ -52,11 +52,16 @@ var simpleStore = {
 
     render: function (url, s) {
         var type = url.split('/')[0];
-
+        
         var map = {
             // Main view
             '': function () {
                 simpleStore.renderProducts(simpleStore.products, s);
+            },
+            // Category view
+            '#category': function () {
+                var type_category = url.split('#category/')[1].trim();
+                simpleStore.renderProductsCategory(simpleStore.products, s, type_category);
             },
             // Detail view
             '#product': function () {
@@ -81,10 +86,11 @@ var simpleStore = {
         tmpl.find('.item_name').text(product.name);
         tmpl.find('.item_price').text(product.price);
         tmpl.find('.item_description').text(product.description);
+        tmpl.addClass(product.categoria)
     },
 
     renderProducts: function (products, s) {
-
+        
         var rowCount = 1,
             numProducts = products.length,
             numRows = Math.ceil(products.length / s.numColumns),
@@ -111,8 +117,70 @@ var simpleStore = {
 
             // List layout
             products.forEach(function (product, i) {
-
+        
 				if (!product.soldOut) {
+					var tmpl = $('#products-template').html(),
+						$tmpl = $(tmpl);
+
+					// Set item width
+					$tmpl.first().addClass(itemWidth);
+
+					// Insert data into template
+					simpleStore.insertData($tmpl, product);
+
+					// Render detail view on hash change
+					var getDetail = $tmpl.find('.simpleStore_getDetail');
+					getDetail.on('click', function (e) {
+						e.preventDefault();
+						window.location.hash = 'product/' + product.id;
+					});
+
+					// Check where to add new item based on row
+					if (i === 0) {
+						i = 1;
+					}
+					if (i % (s.numColumns) === 0) {
+						rowCount++;
+					}
+
+					// Append to appropriate container
+					$('.' + s.rowClass + rowCount).append($tmpl);
+				}
+            });
+        });
+    },
+
+
+    renderProductsCategory: function (products, s, category='') {
+        
+        var rowCount = 1,
+            numProducts = products.length,
+            numRows = Math.ceil(products.length / s.numColumns),
+            itemWidth;
+
+        s.cartContainer.hide();
+        s.container.fadeOut(s.fadeSpeed, function () {
+
+            // Empty out main container on load
+            s.container.html('').fadeIn(s.fadeSpeed);
+
+            // Build rows based on number of products
+            for (var r = 0; r < numRows; r++) {
+                s.container.append('<div class="row ' + s.rowClass + (r + 1) + '"></div>');
+            }
+
+            // Get item column width
+            var widthClasses = s.columnWidthClasses;
+            for (var k in widthClasses) {
+                if (k == s.numColumns) {
+                    itemWidth = widthClasses[k];
+                }
+            }
+
+            // List layout
+            products.forEach(function (product, i) {
+            
+				if (!product.soldOut && product.category == category) {
 					var tmpl = $('#products-template').html(),
 						$tmpl = $(tmpl);
 
@@ -305,7 +373,7 @@ var simpleStore = {
 			errorMsg = 'There was an error validating your cart.';
 
 		if (s.mode === "JSON") {
-			 $.get(s.JSONFile)
+			$.get(s.JSONFile)
 				.success(function () {
 					$.getJSON(s.JSONFile, function (data) {
 						var JSONData = data.products;
@@ -427,3 +495,49 @@ var simpleStore = {
         }
     }
 };
+
+sider_bar = {
+    init: function (options) {
+        options.button_event.click(()=>{
+
+            //Ação no btn menu
+            if(!options.button_event.hasClass( "open" )){
+                options.button_event.addClass("open")
+                options.div.html(options.template.html())
+            }else{
+                options.button_event.removeClass('open')
+                options.div.html('')
+            }
+
+            // Checks to make sure file exists
+            $.get(options.category)
+            .success(function (response) {
+
+                let tmp = `<a href="#" class="${options.close_generic}"><span class="fa fa-circle ml-1"></span> Todos</a>`;
+                Object.keys(response).forEach((a)=>{
+                    tmp += `<a href="#category/${a}" class="${options.close_generic}"><span class="fa fa-circle ml-1"></span> ${response[a]}</a>`
+                });
+
+                $('.div_category').html(tmp);
+
+                action_close()
+
+            })
+            .fail(function () { 
+                alert('Erro ao carregar as categorias')
+            });
+
+            // fechar sidebar em outros elementos
+            let action_close = ()=>{
+                $(options.class_close.selector).each((a,i)=>{
+                    $(i).on('click',()=>{
+                        options.button_event.removeClass('open')
+                        options.div.html('')
+                    })
+                });
+            }
+            action_close()
+
+        });
+    }
+}
