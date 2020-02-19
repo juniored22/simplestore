@@ -86,6 +86,8 @@ var simpleStore = {
         tmpl.find('.item_name').text(product.name);
         tmpl.find('.item_price').text(product.price);
         tmpl.find('.item_description').text(product.description);
+        tmpl.find('.item_brand').text(product.brand);
+        tmpl.find('.item_preper').text(product.preper);
         tmpl.addClass(product.categoria)
     },
 
@@ -152,6 +154,13 @@ var simpleStore = {
 
 
     renderProductsCategory: function (products, s, category='') {
+        
+        console.log("filtro categoria",category);
+        console.log("produtos",products);
+
+        var filtered = products.filter(function(el) { return el.category == category; });
+
+        products = filtered
         
         var rowCount = 1,
             numProducts = products.length,
@@ -326,7 +335,7 @@ var simpleStore = {
         var errorMsg = 'There was an error loading the JSON file.' +
             ' Please make sure you have "' + s.JSONFile + '" file in' +
             ' your main directory.';
-
+        
         // Checks to make sure file exists
         $.get(s.JSONFile)
             .success(function () {
@@ -512,6 +521,8 @@ sider_bar = {
             // Checks to make sure file exists
             $.get(options.category)
             .success(function (response) {
+
+                response = JSON.parse(response)
 
                 let tmp = `<a href="#" class="${options.close_generic}"><span class="fa fa-circle ml-1"></span> Todos</a>`;
                 Object.keys(response).forEach((a)=>{

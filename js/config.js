@@ -79,7 +79,7 @@ $(function() {
 		numColumns : 3,
 
 		// name of JSON file, located in directory root
-		JSONFile : "products.json"
+		JSONFile : "http://localhost/facilities-food/api/produto/"
 
 	});
 
@@ -90,7 +90,7 @@ $(function() {
 		button_event:	$('#event_sidebar'),
 		class_close:	$('.close_sidebar'),
 		close_generic:	'close_sidebar',
-		category: "category.json"
+		category: "http://localhost/facilities-food/api/categorias"
 	});
 
 });
