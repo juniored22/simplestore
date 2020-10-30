@@ -4,9 +4,10 @@ $(function() {
 	    // array representing the format and columns of the cart, see
 	    // the cart columns documentation
 	    cartColumns: [
-	        { attr: "name" , label: "Nome" },
+			{ attr: "name" , label: "Nome" },
+			{ attr: "note" , label: false },
 	        { attr: "price" , label: "Preço", view: 'currency' },
-	        { view: "decrement" , label: false },
+			{ view: "decrement" , label: false },
 	        { attr: "quantity" , label: "Qty" },
 	        { view: "increment" , label: false },
 	        { attr: "total" , label: "SubTotal", view: 'currency' },
@@ -18,9 +19,25 @@ $(function() {
 
 	    // how simpleCart should checkout, see the checkout reference for more info
 	    checkout: {
-	        type: "PayPal" ,
-	        email: "you@yours.com"
-	    },
+	        type: "custom" ,
+			email: "you@yours.com",
+			method:"POST",
+			urlChecout: 'http://35.237.253.252/facilities-food/api/checkout',
+			fn: (fun, simpleCart, checkout_config)=>{
+			
+					$.get('http://35.237.253.252/facilities-food/api/produto')
+					.success((data)=>{
+						if(localStorage.getItem('remember_facilities_food')){
+							setTimeout(()=>{
+								fun()
+							},2000)
+							
+						}else {
+							openModalLogin(fun)
+						}
+					})
+			}
+		},
 
 	    // set the currency, see the currency reference for more info
 	    currency: "BRL",
@@ -61,7 +78,7 @@ $(function() {
 	    afterAdd                	: null,
 	    load                    	: null,
 	    beforeSave              	: null,
-	    afterSave               	: null,
+	    afterSave               	: clearNote,
 	    update                  	: null,
 	    ready                   	: null,
 	    checkoutSuccess             : null,
@@ -73,24 +90,24 @@ $(function() {
 	simpleStore.init({
 
 		// brand can be text or image URL
-		brand : "http://localhost/facilities-food/images/kcb-facilities_logo.png",
+		brand : "http://35.237.253.252/facilities-food/images/kcb-facilities_logo.png",
 
 		// numder of products per row (accepts 1, 2 or 3)
 		numColumns : 3,
 
 		// name of JSON file, located in directory root
-		JSONFile : "http://localhost/facilities-food/api/produto/"
+		JSONFile : "http://35.237.253.252/facilities-food/api/produto?unidade=" + localStorage.getItem('unidade_facilities_food') || ''
 
 	});
 
 	sider_bar.init({
-		div : 			$('#div-sidebar'), 
-		template: 		$('#sidebar-template'), 
-		element:		$('.sidebar'), 
+		div : 			$('#div-sidebar'),
+		template: 		$('#sidebar-template'),
+		element:		$('.sidebar'),
 		button_event:	$('#event_sidebar'),
 		class_close:	$('.close_sidebar'),
 		close_generic:	'close_sidebar',
-		category: "http://localhost/facilities-food/api/categorias"
+		category: "http://35.237.253.252/facilities-food/api/categorias"
 	});
 
 });

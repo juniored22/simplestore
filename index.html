@@ -30,6 +30,15 @@
 </head>
 <body>
 
+<div class="config_unidade hidden">
+    <span>Configuração unidade</span>
+    <select name="" id="unidades">
+        <option value="1">SELECIONE UMA UNIDADE</option>
+    </select>
+    <button class="save_config" style="margin: 4px;"> <i class="fa fa-save"></i> SALVAR</button>
+</div>
+<div id="mySite">
+    <div id="div-modal-login"></div>
     <!-- Primary Page Layout
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div id="div-sidebar"></div>
@@ -37,14 +46,41 @@
     <div class="container simpleStore">
         <div class="row">
             <a class="brand" href="#"></a>
-            <a id="event_sidebar" class="button u-pull-right columns two " href="javascript:;">MENU<i class="fa fa-bars"></i></a>
-            <a class="button button-primary u-pull-right simpleStore_viewCart">
-                <i class="fa fa-shopping-cart"></i> Cart <span class="simpleCart_total"></span>
+
+     
+            <a id="event_sidebar" class="button u-pull-right columns two radius" href="javascript:;">MENU<i class="fa fa-bars"></i></a>
+            <a class="button button-primary u-pull-right simpleStore_viewCart radius">
+                <i class="fa fa-shopping-cart "></i> Cart <span class="simpleCart_total"></span>
             </a>
+            <a id="meus_pedidos" style="margin: 0 30px; width: 150px" class="button u-pull-right columns two radius" href="#"><i class="fa fa-user"></i>MEUS PEDIDOS</a>
+            <a id="" style="margin: 0 ;" class="button u-pull-right columns two radius link-home" href="#"><i class="fa fa-home"></i>HOME</a>
+          
+            
+        </div>
+
+        <div class="banner">
+            <div>
+                <h1 class="font_banner_h1">Facilities</h1>
+                <h1>Food</h1>
+
+                <img class="mouse_scroll" src="images/scroll.svg" alt="">
+            </div>
         </div>
         <div class="simpleStore_container"></div>
         <div class="simpleStore_cart_container"></div>
+
+        <div class="empty_view">
+            <h4>CATEGORIA SEM PRODUTO</h4>
+        </div>
+        
     </div>
+
+ 
+    <!-- <div id="notify-template">
+
+        <div class="notify_text" style="display:none">teste</div>
+    </div>
+    -->
 
     <!-- Templates
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -52,23 +88,27 @@
 
     <!-- Sider-bar View -->
     <script id="sidebar-template" type="x-template">
+       
         <div class="column">
             <div class="sidebar">
                 <div class="row ">
                     <div class="sidebar-overlay"></div>
                     <div class="sidebar-content">
-                        <div  class="close_sidebar"><span class="x" >x</span></div>
+                        <div  class="close_sidebar"><span class="x" >Fechar</span></div>
                         <div class="top-head">
-                            <div class="name">Mohan Khadka</div>
-                            <div class="email">contact@mohankhadka.com.np</div>
+                            <div class="name"></div>
+                            <div class="email"></div>
+                            <div id="text_unidade" ></div>
                         </div>
                         <div class="nav-left">
                             <a href="#" class="close_sidebar"><span class="fa fa-home"></span> Home</a>
                             <a href="#cart"  class="close_sidebar"><span class="fa fa-shopping-cart"></span> Carrinho</a>
-                            <a href="javascript:;"><span class="fa fa-filter"></span> Filtro</a>
+                            <div class="title_filter"><span class="fa fa-filter"></span> Filtro</div>
                             <div class="div_category">
                             </div>
                         </div>
+                        <br>
+                        <div class="div_log_off" > <a href="javascript:;" class="close_sidebar button_login" onclick="openModalLogin()">Login</a>  <i id="logout" onclick="logout()" class="fa fa-power-off" > logout</i></div>
                     </div>
                 </div>
             </div>
@@ -78,8 +118,8 @@
     <!-- Products View -->
     <script id="products-template" type="x-template">
         <div class="column">
-            <div class="simpleCart_shelfItem">
-                <img src="" class="item_thumb"/>
+            <div style="cursor:pointer;" class="simpleCart_shelfItem simpleStore_getDetail">
+                <img src="" class="item_thumb_min"/>
                 <div class="row">
                     <h5 class="item_name"></h5>
                     <div class="simpleStore_getDetail_container">
@@ -109,10 +149,13 @@
                     <span class="">tempo de preparo</span>
                     <span class="item_preper"></span>
                     <span class="item_price"></span>
-
+                    <span class="item_sku" style="visibility: hidden;"></span>
                     <div class="qty">
                         <label>QTY</label>
                         <input type="number" value="1" min="1" step="1" class="item_Quantity">
+                    </div>
+                    <div class="">
+                        <textarea name="" class="item_note" style="width: 100%;height:56px" rows="18" placeholder="Nota para o pedido..." ></textarea>
                     </div>
                     <div class="simpleStore_options"></div>
                     <a class="item_add button u-pull-right" href="javascript:;">Add para o Carrinho</a>
@@ -156,18 +199,60 @@
         </div>
     </script>
 
+
+
+
+    <!-- Login -->
+    <script id="modal-login-template" type="x-template">
+        <div class="column login">
+            <a id="close-login" href="javascript:;">fechar</a>
+            <form id="form_login_auth" method="POST">
+                <fieldset>
+                    <legend class="u-full-width">Login Facilities</legend>
+                    <label for="txtEmail">Login</label>
+                    <input class="u-full-width" type="text" placeholder="login" id="login_" name="login" />
+
+                    <label for="txtPassword">Senha</label>
+                    <input  class="u-full-width" type="password" placeholder="*********" id="password_" name="password" />
+
+                    <input class="u-full-width button-primary" type="submit" value="Entrar">
+                </fieldset>
+                <fieldset>
+                    <!-- <a href="#">Forgot Password</a> -->
+                    <!-- <a class="u-pull-right" href="#">Register</a> -->
+                </fieldset>
+            </form>
+        </div>
+    </script>
+
     <!-- Error View -->
     <script id="error-template" type="x-template">
         <div class="error">
-            <b>Sorry, something went wrong :(</b>
+            <b>Sorry, something went wrong </b>
 			<p class="error_text"></p>
 			<a href="#" class="close alert_close">&times;</a>
         </div>
     </script>
 
+    <script id="notify-template" type="x-template">
+        <div class="notify_text">
+            <b>ITEM ADICIONADO</b>
+        </div>
+    </script>
+
 <!-- End Document
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</div>
+
+<div class="setting">
+    <i class="icon_set fa fa-cog"></i>
+</div>
+
+
+<span class="c_" style="margin: 69px auto 0;"><img style="max-width: 120px;" src="images/logo_kc.png"> <img style="max-width: 40px;" src="images/logo-bl.png">  </span>
 </body>
+</body>
+
 
 <!-- Scripts
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
